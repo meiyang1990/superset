@@ -148,6 +148,16 @@ configOverrides:
     pymysql.install_as_MySQLdb()
     SECRET_KEY = 'R3ZK8ZmgqjuQRg/2hmhGUf9kDAWM/+OumKK36cwqT04k/LZZZtMJRalp'
     SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{os.getenv('DB_USER')}:{os.getenv('DB_PASS')}@{os.getenv('DB_HOST')}:{os.getenv('DB_PORT')}/{os.getenv('DB_NAME')}"
+    from flask_caching.backends.filesystemcache import FileSystemCache
+    CACHE_CONFIG = {'CACHE_TYPE': 'FileSystemCache', 'CACHE_DIR': '/tmp/superset_cache', 'CACHE_DEFAULT_TIMEOUT': 86400}
+    DATA_CACHE_CONFIG = {'CACHE_TYPE': 'FileSystemCache', 'CACHE_DIR': '/tmp/superset_data_cache', 'CACHE_DEFAULT_TIMEOUT': 86400}
+    RESULTS_BACKEND = FileSystemCache('/tmp/superset_results')
+    class CeleryConfig:
+        imports = ("superset.sql_lab",)
+        broker_url = "filesystem://"
+        result_backend = "filesystem://"
+        filesystem_folder = "/tmp/superset_celery"
+    CELERY_CONFIG = CeleryConfig
   # extend_timeout: |
   #    # Extend timeout to allow long running queries.
   #    SUPERSET_WEBSERVER_TIMEOUT = ...
