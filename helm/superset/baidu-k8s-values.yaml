@@ -144,6 +144,8 @@ extraVolumeMounts: []
 # Files can be passed as helm --set-file configOverrides.my-override=my-file.py
 configOverrides:
   secret: |
+    import pymysql
+    pymysql.install_as_MySQLdb()
     SECRET_KEY = 'R3ZK8ZmgqjuQRg/2hmhGUf9kDAWM/+OumKK36cwqT04k/LZZZtMJRalp'
     SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{os.getenv('DB_USER')}:{os.getenv('DB_PASS')}@{os.getenv('DB_HOST')}:{os.getenv('DB_PORT')}/{os.getenv('DB_NAME')}"
   # extend_timeout: |
