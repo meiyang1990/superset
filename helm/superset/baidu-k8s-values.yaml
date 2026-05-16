@@ -217,6 +217,7 @@ initImage:
 service:
   type: LoadBalancer
   port: 8088
+  loadBalancerIP: "120.48.149.97"
   annotations: {}
   nodePort:
     http: 30088
