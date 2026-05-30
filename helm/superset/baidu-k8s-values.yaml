@@ -32,6 +32,7 @@ extraEnv:
   LANGUAGE: C.UTF-8
   LC_ALL: C.UTF-8
   GUNICORN_TIMEOUT: 300
+  SUPERSET_APP_ROOT: /superset
 
 extraEnvRaw: []
 extraSecretEnv:
@@ -77,6 +78,8 @@ configOverrides:
         result_backend = "filesystem://"
         filesystem_folder = "/tmp/celery"
     CELERY_CONFIG = CeleryConfig
+    ENABLE_PROXY_FIX = True
+    LOGO_TARGET_PATH = "/welcome/"
     BABEL_DEFAULT_LOCALE = "zh"
     LANGUAGES = {"zh": {"flag": "cn", "name": "简体中文"}, "en": {"flag": "us", "name": "English"}}
 
@@ -96,12 +99,9 @@ initImage:
   pullPolicy: Always
 
 service:
-  type: LoadBalancer
+  type: ClusterIP
   port: 8088
-  loadBalancerIP: "120.48.149.97"
   annotations: {}
-  nodePort:
-    http: 30088
 
 ingress:
   enabled: false
@@ -153,6 +153,33 @@ supersetNode:
     requests:
       cpu: 500m
       memory: 1Gi
+  startupProbe:
+    failureThreshold: 60
+    httpGet:
+      path: /superset/health
+      port: http
+    initialDelaySeconds: 15
+    periodSeconds: 5
+    successThreshold: 1
+    timeoutSeconds: 1
+  readinessProbe:
+    failureThreshold: 3
+    httpGet:
+      path: /superset/health
+      port: http
+    initialDelaySeconds: 15
+    periodSeconds: 15
+    successThreshold: 1
+    timeoutSeconds: 1
+  livenessProbe:
+    failureThreshold: 3
+    httpGet:
+      path: /superset/health
+      port: http
+    initialDelaySeconds: 15
+    periodSeconds: 15
+    successThreshold: 1
+    timeoutSeconds: 1
 
 supersetWorker:
   replicas:
