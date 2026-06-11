@@ -79,7 +79,9 @@ configOverrides:
         filesystem_folder = "/tmp/celery"
     CELERY_CONFIG = CeleryConfig
     ENABLE_PROXY_FIX = True
-    LOGO_TARGET_PATH = "/welcome/"
+    PROXY_FIX_CONFIG = {"x_for": 1, "x_proto": 1, "x_host": 1, "x_port": 0, "x_prefix": 1}
+    SESSION_COOKIE_PATH = "/superset"
+    LOGO_TARGET_PATH = "/superset/dashboard/list/"
     BABEL_DEFAULT_LOCALE = "zh"
     LANGUAGES = {"zh": {"flag": "cn", "name": "简体中文"}, "en": {"flag": "us", "name": "English"}}
 

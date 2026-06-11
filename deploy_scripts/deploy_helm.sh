@@ -1,0 +1,1 @@
+helm upgrade --install superset ./helm/superset -n bigdata -f ./helm/superset/baidu-k8s-values.yaml
