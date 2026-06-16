@@ -110,11 +110,11 @@ ingress:
 
 resources:
   limits:
+    cpu: 4
+    memory: 8Gi
+  requests:
     cpu: 2
     memory: 4Gi
-  requests:
-    cpu: 500m
-    memory: 1Gi
 
 hostAliases: []
 
@@ -150,11 +150,11 @@ supersetNode:
         - dockerize -wait "tcp://$DB_HOST:$DB_PORT" -timeout 120s
   resources:
     limits:
+      cpu: 4
+      memory: 8Gi
+    requests:
       cpu: 2
       memory: 4Gi
-    requests:
-      cpu: 500m
-      memory: 1Gi
   startupProbe:
     failureThreshold: 60
     httpGet:
