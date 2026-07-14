@@ -111,10 +111,10 @@ ingress:
 resources:
   limits:
     cpu: 4
-    memory: 8Gi
+    memory: 16Gi
   requests:
     cpu: 2
-    memory: 4Gi
+    memory: 8Gi
 
 hostAliases: []
 
@@ -151,10 +151,10 @@ supersetNode:
   resources:
     limits:
       cpu: 4
-      memory: 8Gi
+      memory: 16Gi
     requests:
       cpu: 2
-      memory: 4Gi
+      memory: 8Gi
   startupProbe:
     failureThreshold: 60
     httpGet:
