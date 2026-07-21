@@ -130,7 +130,7 @@ supersetNode:
     - ". {{ .Values.configMountPath }}/superset_bootstrap.sh && /usr/bin/run-server.sh"
   connections:
     db_type: mysql
-    db_host: "192.168.16.181"
+    db_host: "rm-2zef08l7366p0436a.mysql.rds.aliyuncs.com"
     db_port: "3306"
     db_user: superset_user
     db_pass: "pnDQ8dK6#38P"
