@@ -21,7 +21,9 @@ bootstrapScript: |
     pymysql \
     cryptography \
     pydoris \
-    sqlalchemy-doris
+    sqlalchemy-doris \
+    "SQLAlchemy<2" \
+    starrocks
 
 configFromSecret: '{{ template "superset.fullname" . }}-config'
 envFromSecret: '{{ template "superset.fullname" . }}-env'
